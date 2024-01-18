@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'unidade.dart';
 
 import 'initial_page.dart';
 
@@ -13,7 +14,10 @@ class StudyKoreanAPP extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       initialRoute: "/TelaInicial",
-      routes: {"/TelaInicial": (context) => const TelaInicial()},
+      routes: {
+        "/TelaInicial": (context) => const TelaInicial(),
+        "/Unidade": (context) => const UnidadePage()
+      },
     );
   }
 }
