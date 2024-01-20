@@ -44,83 +44,165 @@ class ContainerGrande extends StatelessWidget {
   double larguraAparelho;
   double comprimentoAparelho;
   String titulo;
+  bool interativo;
 
   ContainerGrande(this.comprimentoAparelho, this.larguraAparelho, this.titulo,
+      this.interativo,
       {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: GestureDetector(
-        onTap: () {},
-        child: Container(
-          margin: const EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(15), // Bordas arredondadas
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.9),
-                offset: const Offset(0, 5),
-                blurRadius: 10,
+      child: interativo
+          ? GestureDetector(
+              onTap: () {
+                Navigator.of(context)
+                    .pushNamed("/EditarUnidade", arguments: {"tipo": titulo});
+              },
+              child: Container(
+                margin: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius:
+                      BorderRadius.circular(15), // Bordas arredondadas
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.9),
+                      offset: const Offset(0, 5),
+                      blurRadius: 10,
+                    ),
+                  ],
+                ),
+                width: larguraAparelho - 20,
+                height: comprimentoAparelho,
+                child: Column(
+                  children: [
+                    Text(
+                      titulo,
+                      style: textoMedioBold,
+                    ),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: (larguraAparelho - 20) * 0.35,
+                          child: const Center(
+                            child: Text(
+                              "Coreano",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: (larguraAparelho - 20) * 0.35,
+                          child: const Center(
+                            child: Text(
+                              "Português",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          alignment: Alignment.center,
+                          width: (larguraAparelho - 20) * 0.30,
+                          child: const Text(
+                            "Dificuldade",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      width: (larguraAparelho - 20),
+                      height: (comprimentoAparelho - 100) / 2,
+                      child: ListView(
+                        children: [
+                          Linha("ㅁㅇㄴㄻㄴㅇㄹ", "Teste", "facil", larguraAparelho),
+                          Linha("ㅁㅇㄴㄻㄴㅇㄹ", "Teste", "medio", larguraAparelho),
+                          Linha("ㅁㅇㄴㄻㄴㅇㄹ", "Teste", "dificil", larguraAparelho)
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ],
-          ),
-          width: larguraAparelho - 20,
-          height: comprimentoAparelho / 2,
-          child: Column(
-            children: [
-              Text(
-                titulo,
-                style: textoMedioBold,
-              ),
-              Row(
-                children: [
-                  SizedBox(
-                    width: (larguraAparelho - 20) * 0.35,
-                    child: const Text(
-                      "Coreano",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: (larguraAparelho - 20) * 0.35,
-                    child: const Text(
-                      "Português",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                    width: (larguraAparelho - 20) * 0.30,
-                    child: const Text(
-                      "Dificuldade",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+            )
+          : Container(
+              margin: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(15), // Bordas arredondadas
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.9),
+                    offset: const Offset(0, 5),
+                    blurRadius: 10,
                   ),
                 ],
               ),
-              SizedBox(
-                width: (larguraAparelho - 20),
-                height: (comprimentoAparelho - 100) / 2,
-                child: ListView(
-                  children: [
-                    Linha("ㅁㅇㄴㄻㄴㅇㄹ", "Teste", "facil", larguraAparelho),
-                    Linha("ㅁㅇㄴㄻㄴㅇㄹ", "Teste", "medio", larguraAparelho),
-                    Linha("ㅁㅇㄴㄻㄴㅇㄹ", "Teste", "dificil", larguraAparelho)
-                  ],
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
+              width: larguraAparelho - 20,
+              height: comprimentoAparelho,
+              child: Column(
+                children: [
+                  Text(
+                    titulo,
+                    style: textoMedioBold,
+                  ),
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: (larguraAparelho - 20) * 0.35,
+                        child: const Center(
+                          child: Text(
+                            "Coreano",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: (larguraAparelho - 20) * 0.35,
+                        child: const Center(
+                          child: Text(
+                            "Português",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        alignment: Alignment.center,
+                        width: (larguraAparelho - 20) * 0.30,
+                        child: const Text(
+                          "Dificuldade",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    width: (larguraAparelho - 20),
+                    height: (comprimentoAparelho - 100) / 2,
+                    child: ListView(
+                      children: [
+                        Linha("ㅁㅇㄴㄻㄴㅇㄹ", "Teste", "facil", larguraAparelho),
+                        Linha("ㅁㅇㄴㄻㄴㅇㄹ", "Teste", "medio", larguraAparelho),
+                        Linha("ㅁㅇㄴㄻㄴㅇㄹ", "Teste", "dificil", larguraAparelho)
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
     );
   }
 }
@@ -138,19 +220,25 @@ class Linha extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        SizedBox(width: (larguraAparelho - 20) * 0.35, child: Text(coreano)),
-        SizedBox(width: (larguraAparelho - 20) * 0.35, child: Text(portugues)),
+        SizedBox(
+            width: (larguraAparelho - 20) * 0.35,
+            child: Center(child: Text(coreano))),
+        SizedBox(
+            width: (larguraAparelho - 20) * 0.35,
+            child: Center(child: Text(portugues))),
         Container(
           width: (larguraAparelho - 20) * 0.30,
           alignment: Alignment.center,
-          child: Container(
-            width: 7,
-            height: 7,
-            color: dificuldade == "facil"
-                ? Colors.green
-                : dificuldade == "medio"
-                    ? Colors.yellow
-                    : Colors.red,
+          child: Center(
+            child: Container(
+              width: 7,
+              height: 7,
+              color: dificuldade == "facil"
+                  ? Colors.green
+                  : dificuldade == "medio"
+                      ? Colors.yellow
+                      : Colors.red,
+            ),
           ),
         )
       ],

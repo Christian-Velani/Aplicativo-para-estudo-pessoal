@@ -17,14 +17,16 @@ class UnidadePage extends StatelessWidget {
         child: Column(
           children: [
             ContainerGrande(
-              mediaQueryData.size.height,
+              mediaQueryData.size.height / 2,
               mediaQueryData.size.width,
               "Palavras",
+              true,
             ),
             ContainerGrande(
               mediaQueryData.size.height,
               mediaQueryData.size.width,
               "Frases",
+              true,
             ),
             ElevatedButton(
               onPressed: () {},
