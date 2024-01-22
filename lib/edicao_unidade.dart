@@ -96,7 +96,7 @@ class _EditarUnidadePageState extends State<EditarUnidadePage> {
         child: Column(
           children: [
             ContainerGrande(mediaQueryData.size.height - 100,
-                mediaQueryData.size.width, tipo, false),
+                mediaQueryData.size.width, tipo, false, false),
             Row(
               children: [
                 Container(
@@ -118,7 +118,10 @@ class _EditarUnidadePageState extends State<EditarUnidadePage> {
                 Container(
                   margin: const EdgeInsets.only(right: 10),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pushNamed("/ExcluirItens",
+                          arguments: {"tipo": tipo});
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red,
                     ),

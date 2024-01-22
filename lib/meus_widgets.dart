@@ -45,9 +45,10 @@ class ContainerGrande extends StatelessWidget {
   double comprimentoAparelho;
   String titulo;
   bool interativo;
+  bool modoExclusao;
 
   ContainerGrande(this.comprimentoAparelho, this.larguraAparelho, this.titulo,
-      this.interativo,
+      this.interativo, this.modoExclusao,
       {super.key});
 
   @override
@@ -192,13 +193,27 @@ class ContainerGrande extends StatelessWidget {
                   SizedBox(
                     width: (larguraAparelho - 20),
                     height: (comprimentoAparelho - 100) / 2,
-                    child: ListView(
-                      children: [
-                        Linha("ㅁㅇㄴㄻㄴㅇㄹ", "Teste", "facil", larguraAparelho),
-                        Linha("ㅁㅇㄴㄻㄴㅇㄹ", "Teste", "medio", larguraAparelho),
-                        Linha("ㅁㅇㄴㄻㄴㅇㄹ", "Teste", "dificil", larguraAparelho)
-                      ],
-                    ),
+                    child: modoExclusao
+                        ? ListView(
+                            children: [
+                              CheckBoxLinha(
+                                  "ㅁㅇㄴㄻㄴㅇㄹ", "Teste", "facil", larguraAparelho),
+                              CheckBoxLinha(
+                                  "ㅁㅇㄴㄻㄴㅇㄹ", "Teste", "medio", larguraAparelho),
+                              CheckBoxLinha("ㅁㅇㄴㄻㄴㅇㄹ", "Teste", "dificil",
+                                  larguraAparelho)
+                            ],
+                          )
+                        : ListView(
+                            children: [
+                              Linha(
+                                  "ㅁㅇㄴㄻㄴㅇㄹ", "Teste", "facil", larguraAparelho),
+                              Linha(
+                                  "ㅁㅇㄴㄻㄴㅇㄹ", "Teste", "medio", larguraAparelho),
+                              Linha("ㅁㅇㄴㄻㄴㅇㄹ", "Teste", "dificil",
+                                  larguraAparelho)
+                            ],
+                          ),
                   )
                 ],
               ),
@@ -236,6 +251,60 @@ class Linha extends StatelessWidget {
               color: dificuldade == "facil"
                   ? Colors.green
                   : dificuldade == "medio"
+                      ? Colors.yellow
+                      : Colors.red,
+            ),
+          ),
+        )
+      ],
+    );
+  }
+}
+
+class CheckBoxLinha extends StatefulWidget {
+  String coreano;
+  String portugues;
+  String dificuldade;
+  double larguraAparelho;
+
+  CheckBoxLinha(
+      this.coreano, this.portugues, this.dificuldade, this.larguraAparelho,
+      {super.key});
+
+  @override
+  State<CheckBoxLinha> createState() => _CheckBoxLinhaState();
+}
+
+class _CheckBoxLinhaState extends State<CheckBoxLinha> {
+  bool estado = false;
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Checkbox(
+            value: estado,
+            onChanged: (value) {
+              setState(() {
+                estado == false ? estado = true : estado = false;
+                value = estado;
+              });
+            }),
+        SizedBox(
+            width: (widget.larguraAparelho - 20) * 0.30,
+            child: Center(child: Text(widget.coreano))),
+        SizedBox(
+            width: (widget.larguraAparelho - 20) * 0.30,
+            child: Center(child: Text(widget.portugues))),
+        Container(
+          width: (widget.larguraAparelho - 20) * 0.25,
+          alignment: Alignment.center,
+          child: Center(
+            child: Container(
+              width: 7,
+              height: 7,
+              color: widget.dificuldade == "facil"
+                  ? Colors.green
+                  : widget.dificuldade == "medio"
                       ? Colors.yellow
                       : Colors.red,
             ),

@@ -21,13 +21,10 @@ class UnidadePage extends StatelessWidget {
               mediaQueryData.size.width,
               "Palavras",
               true,
+              false,
             ),
-            ContainerGrande(
-              mediaQueryData.size.height,
-              mediaQueryData.size.width,
-              "Frases",
-              true,
-            ),
+            ContainerGrande(mediaQueryData.size.height / 2,
+                mediaQueryData.size.width, "Frases", true, false),
             ElevatedButton(
               onPressed: () {},
               style: ElevatedButton.styleFrom(
