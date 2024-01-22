@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
 import 'package:study_korean/styles.dart';
@@ -13,9 +13,62 @@ class Unidade extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final nomeUnidade = TextEditingController();
+    final formKey = GlobalKey<FormState>();
+    void AdicionarUnidade() {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text("Adicionar Unidade"),
+            content: SizedBox(
+              height: MediaQuery.of(context).size.height / 9,
+              child: Form(
+                key: formKey,
+                child: Column(
+                  children: [
+                    TextFormField(
+                      validator: (value) {
+                        return (value != null && value.isNotEmpty)
+                            ? null
+                            : 'Insira algo';
+                      },
+                      controller: nomeUnidade,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: "Nome da Unidade",
+                      ),
+                      style: const TextStyle(color: Colors.black),
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text("Cancelar"),
+              ),
+              TextButton(
+                onPressed: () {
+                  if (formKey.currentState!.validate()) {
+                    Navigator.pop(context);
+                  }
+                },
+                child: const Text("Adicionar"),
+              ),
+            ],
+          );
+        },
+      );
+    }
+
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pushNamed("/Unidade");
+        nome != "+"
+            ? Navigator.of(context).pushNamed("/Unidade")
+            : AdicionarUnidade();
       },
       child: Container(
         margin: const EdgeInsets.all(20),
