@@ -26,7 +26,9 @@ class UnidadePage extends StatelessWidget {
             ContainerGrande(mediaQueryData.size.height / 2,
                 mediaQueryData.size.width, "Frases", true, false),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pushNamed("/EscolherPratica");
+              },
               style: ElevatedButton.styleFrom(
                 fixedSize: Size(mediaQueryData.size.width / 3, 50),
                 backgroundColor: Colors.green,

@@ -314,3 +314,37 @@ class _CheckBoxLinhaState extends State<CheckBoxLinha> {
     );
   }
 }
+
+class MeuCheckBoxListTile extends StatefulWidget {
+  Function minhaFuncao;
+  String tipoPratica;
+
+  MeuCheckBoxListTile(this.minhaFuncao, this.tipoPratica, {super.key});
+
+  @override
+  State<MeuCheckBoxListTile> createState() => _MeuCheckBoxListTileState();
+}
+
+class _MeuCheckBoxListTileState extends State<MeuCheckBoxListTile> {
+  bool estado = false;
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Checkbox(
+          value: estado,
+          onChanged: (value) {
+            setState(
+              () {
+                estado == false ? estado = true : estado = false;
+                value = estado;
+              },
+            );
+            widget.minhaFuncao(widget.tipoPratica);
+          },
+        ),
+        Text(widget.tipoPratica)
+      ],
+    );
+  }
+}
