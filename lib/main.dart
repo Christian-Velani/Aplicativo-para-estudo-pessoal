@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:study_korean/edicao_unidade.dart';
 import 'package:study_korean/escolha_pratica.dart';
 import 'package:study_korean/exclusao_itens.dart';
+import 'praticar.dart';
 import 'unidade.dart';
-
 import 'initial_page.dart';
 
 void main() {
@@ -19,10 +19,11 @@ class StudyKoreanAPP extends StatelessWidget {
       initialRoute: "/TelaInicial",
       routes: {
         "/TelaInicial": (context) => const TelaInicial(),
-        "/Unidade": (context) => const UnidadePage(),
+        "/Unidade": (context) => UnidadePage(),
         "/EditarUnidade": (context) => const EditarUnidadePage(),
         "/ExcluirItens": (context) => const ExclusaoItensPage(),
         "/EscolherPratica": (context) => const EscolherPraticaPage(),
+        "/Praticar": (context) => PraticarPage(),
       },
     );
   }

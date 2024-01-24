@@ -1,12 +1,21 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:study_korean/meus_widgets.dart';
 
 class UnidadePage extends StatelessWidget {
-  const UnidadePage({super.key});
+  late String titulo;
+
+  UnidadePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     final mediaQueryData = MediaQuery.of(context);
+    final args =
+        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
+    if (args.containsKey('titulo')) {
+      titulo = args['titulo'] as String;
+    }
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -27,7 +36,8 @@ class UnidadePage extends StatelessWidget {
                 mediaQueryData.size.width, "Frases", true, false),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pushNamed("/EscolherPratica");
+                Navigator.of(context).pushNamed("/EscolherPratica",
+                    arguments: {"titulo": titulo});
               },
               style: ElevatedButton.styleFrom(
                 fixedSize: Size(mediaQueryData.size.width / 3, 50),

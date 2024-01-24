@@ -12,7 +12,7 @@ class EscolherPraticaPage extends StatefulWidget {
 
 class _EscolherPraticaPageState extends State<EscolherPraticaPage> {
   List<String> tiposPraticas = [];
-
+  late String titulo;
   void AtualizarListaTipo(String tipo) {
     if (!tiposPraticas.contains(tipo)) {
       tiposPraticas.add(tipo);
@@ -42,6 +42,11 @@ class _EscolherPraticaPageState extends State<EscolherPraticaPage> {
   @override
   Widget build(BuildContext context) {
     final mediaQueryData = MediaQuery.of(context);
+    final args =
+        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
+    if (args.containsKey('titulo')) {
+      titulo = args['titulo'] as String;
+    }
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -49,15 +54,16 @@ class _EscolherPraticaPageState extends State<EscolherPraticaPage> {
       ),
       body: Column(
         children: [
-          MeuCheckBoxListTile(AtualizarListaTipo, "Tipo 2"),
-          MeuCheckBoxListTile(AtualizarListaTipo, "Tipo 3"),
-          MeuCheckBoxListTile(AtualizarListaTipo, "Tipo 1"),
-          MeuCheckBoxListTile(AtualizarListaTipo, "Tipo 4"),
-          MeuCheckBoxListTile(AtualizarListaTipo, "Tipo 5"),
+          MeuCheckBoxListTile(AtualizarListaTipo, "Texto"),
+          MeuCheckBoxListTile(AtualizarListaTipo, "Aúdio"),
           Center(
             child: ElevatedButton(
               onPressed: () {
                 if (tiposPraticas.isNotEmpty) {
+                  Navigator.of(context).pushNamed("/Praticar", arguments: {
+                    "tiposAtivados": tiposPraticas,
+                    "titulo": titulo
+                  });
                 } else {
                   Alerta();
                 }

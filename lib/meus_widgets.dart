@@ -67,7 +67,8 @@ class Unidade extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         nome != "+"
-            ? Navigator.of(context).pushNamed("/Unidade")
+            ? Navigator.of(context)
+                .pushNamed("/Unidade", arguments: {"titulo": nome})
             : AdicionarUnidade();
       },
       child: Container(
@@ -399,5 +400,58 @@ class _MeuCheckBoxListTileState extends State<MeuCheckBoxListTile> {
         Text(widget.tipoPratica)
       ],
     );
+  }
+}
+
+class ContainerPerguntaResposta extends StatelessWidget {
+  double larguraAparelho;
+  double alturaAparelho;
+  String texto;
+  String tipo;
+
+  ContainerPerguntaResposta(
+      this.larguraAparelho, this.alturaAparelho, this.texto, this.tipo,
+      {super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return tipo == "Pergunta"
+        ? Container(
+            width: larguraAparelho - 50,
+            height: alturaAparelho / 5,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(15), // Bordas arredondadas
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.9),
+                  offset: const Offset(0, 5),
+                  blurRadius: 10,
+                ),
+              ],
+            ),
+            child: const Center(
+              child: Text("그 사람은 선생님이야 / 그 사람은 선생님이에요"),
+            ),
+          )
+        : GestureDetector(
+            onTap: () {},
+            child: Container(
+              margin: const EdgeInsets.all(10),
+              width: larguraAparelho - 50,
+              height: alturaAparelho / 5,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(15), // Bordas arredondadas
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.9),
+                    offset: const Offset(0, 5),
+                    blurRadius: 10,
+                  ),
+                ],
+              ),
+              child: const Center(child: Text("그 사람은 선생님이야 / 그 사람은 선생님이에요")),
+            ));
   }
 }
